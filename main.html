@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hitesh Patidar - Portfolio</title>
+  <style>
+    :root {
+      --primary-color: #00d4aa;
+      --accent-color: #ff4500;
+      --bg-dark: #0a0e1a;
+      --bg-card: #1a1f2e;
+      --text-light: #fff;
+      --text-muted: #a0a9c0;
+      --border: #2a2f3e;
+      --gradient-main: linear-gradient(135deg, #ff4500, #ff8c00);
+      --gradient-alt: linear-gradient(135deg, #00d4aa, #4facfe);
+      --shadow-1: 0 4px 20px rgba(255, 69, 0, 0.3);
+      --shadow-2: 0 10px 40px rgba(255, 69, 0, 0.4);
+    }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 2rem 1.5rem;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(600px at 20% 30%, #ff450020, transparent),
+                  radial-gradient(400px at 80% 70%, #ff8c0020, transparent),
+                  radial-gradient(300px at 40% 80%, #00d4aa20, transparent);
+      z-index: -1;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      background: rgba(26, 31, 46, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 2rem 1.5rem;
+      position: fixed;
+      top: 0; bottom: 0; left: 0;
+      width: 260px;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+    .sidebar h2 {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    .sidebar p {
+      font-size: 0.95rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .profile-img {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      margin: 0 auto;
+      display: block;
+      border: 2px solid var(--accent-color);
+      box-shadow: 0 0 20px var(--accent-color);
+    }
+    .nav-link {
+      display: block;
+      color: #fff;
+      padding: 0.75rem 1rem;
+      margin: 0.5rem 0;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .nav-link:hover {
+      background: rgba(255, 69, 0, 0.2);
+      box-shadow: var(--shadow-1);
+    }
+
+    /* --- Main Area --- */
+    main {
+      margin-left: 260px;
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        text-align: center;
+      }
+      main {
+        margin-left: 0;
+      }
+    }
+
+    /* --- Hero --- */
+    .hero {
+      padding: 5rem 2rem;
+      background: var(--gradient-main);
+      text-align: center;
+      color: #fff;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero .cta {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--gradient-alt);
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: var(--shadow-1);
+      transition: 0.3s;
+    }
+    .hero .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-2);
+    }
+
+    /* --- Sections --- */
+    section {
+      padding: 4rem 0;
+    }
+    .section-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .about p {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .skills-grid, .projects-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .skill-card, .project-card {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: 0.3s ease;
+    }
+    .skill-card:hover, .project-card:hover {
+      box-shadow: var(--shadow-1);
+      transform: translateY(-4px);
+    }
+    .tech-tag {
+      display: inline-block;
+      margin: 0.3rem;
+      padding: 0.4rem 0.8rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+    }
+
+    .project-card a {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .project-card a:hover {
+      color: var(--primary-color);
+    }
+
+    /* --- Contact --- */
+    .contact-form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .form-input, .form-textarea {
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+    }
+    .submit-btn {
+      padding: 1rem;
+      background: var(--gradient-main);
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .submit-btn:hover {
+      box-shadow: var(--shadow-2);
+    }
+
+    /* --- Footer --- */
+    .footer {
+      padding: 2rem 0;
+      text-align: center;
+      background: var(--bg-card);
+      color: var(--text-muted);
+    }
+    .social-links {
+      margin-bottom: 1rem;
+    }
+    .social-links a {
+      margin: 0 0.5rem;
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <img src="https://avatars.githubusercontent.com/u/65086710?v=4" alt="Hitesh" class="profile-img" />
+    <h2>Hitesh Patidar</h2>
+    <p>Full Stack Developer</p>
+    <nav>
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section id="home" class="hero">
+      <h1>Hello, I'm Hitesh 👨‍💻</h1>
+      <p>Crafting full stack MERN apps with passion & performance.</p>
+      <a href="#contact" class="cta">Let's Connect</a>
+    </section>
+
+    <section id="about" class="container about">
+      <h2 class="section-title">About Me</h2>
+      <p>I am a passionate MERN Stack Developer pursuing B.Tech at LNCTS. I specialize in building scalable, secure, and fast full-stack web apps using MongoDB, Express, React, and Node.js.</p>
+    </section>
+
+    <section id="skills" class="container">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Frontend</h3>
+          <div>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Backend</h3>
+          <div>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Express.js</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Languages</h3>
+          <div>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">C++</span>
+            <span class="tech-tag">C</span>
+            <span class="tech-tag">Java</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Namoh Spices</h3>
+          <p>Full e-commerce platform built for a spice brand with product management, admin dashboard, and secure payments.</p>
+          <a href="https://my-namoh.vercel.app/" target="_blank">🌐 Live Project</a>
+        </div>
+        <div class="project-card">
+          <h3>DesignBazaar</h3>
+          <p>Open-source component contribution platform where developers submit and browse reusable UI components.</p>
+          <a href="https://designbazaar.vercel.app/" target="_blank">🌐 Live Project</a>
+        </div>
+        <div class="project-card">
+          <h3>Blood Donation Platform</h3>
+          <p>Connects blood donors with recipients using smart matching & secure data flow.</p>
+          <a href="https://github.com/hiteshpatidar009/Blood-Donation" target="_blank">🔗 View GitHub</a>
+        </div>
+         <div class="project-card">
+      <h3>NextBuy</h3>
+      <p>Open-source shopping cart with modern UI and Razorpay payment integration.</p>
+      <a href="https://github.com/hiteshpatidar009/NextBuy" target="_blank">🔗 View GitHub</a>
+    </div>
+      <div class="project-card">
+      <h3>FreeLansing</h3>
+      <p>A freelance platform prototype connecting developers and clients with ease.</p>
+      <a href="https://github.com/hiteshpatidar009/Freelancing-websites-and-Form-validation" target="_blank">🔗 View GitHub</a>
+    </div>
+
+    <div class="project-card">
+      <h3>Gardanin</h3>
+      <p>Gardening tools and supplies store with sleek design and product management.</p>
+      <a href="https://github.com/hiteshpatidar009/Garden-Space" target="_blank">🔗 View GitHub</a>
+    </div>
+      </div>
+    </section>
+**
+<section id="certifications" style="padding: 4rem 0; max-width: 1100px; margin: auto;">
+  <h2 style="font-size: 2rem; text-align: center; margin-bottom: 2rem; background: linear-gradient(135deg, #ff4500, #ff8c00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+    Certifications & Internship
+  </h2>
+  <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+
+<div style="background: #1a1f2e; padding: 1.5rem; border-radius: 12px; border: 1px solid #2a2f3e; box-shadow: 0 4px 20px rgba(255, 69, 0, 0.1);">
+      <h3 style="margin-bottom: 0.5rem;">Internship – Ypsilon IT Solutions</h3>
+      <p style="color: #a0a9c0;">MERN Stack Development | Oct 2024 – Apr 2025</p>
+      <a href="https://media.licdn.com/dms/image/v2/D4D22AQG8dMP2V8YlCA/feedshare-shrink_800/B4DZf2GRx8GkAk-/0/1752180531604?e=1755129600&v=beta&t=oxWi1K7fj5AwCYDzqH8NhtOtVSigAMAfMYroIoD1nLg" target="_blank" style="display: inline-block; margin-top: 1rem; color: #ff4500; font-weight: bold;">📄 Internship Letter</a>
+    </div>
+
+
+    <div style="background: #1a1f2e; padding: 1.5rem; border-radius: 12px; border: 1px solid #2a2f3e; box-shadow: 0 4px 20px rgba(255, 69, 0, 0.1);">
+      <h3 style="margin-bottom: 0.5rem;">JavaScript Course (Scaler)</h3>
+      <p style="color: #a0a9c0;">Issued by Scaler Topics | 06 July 2025</p>
+      <a href="https://moonshot.scaler.com/s/li/djLuOfs-r0" target="_blank" style="display: inline-block; margin-top: 1rem; color: #ff4500; font-weight: bold;">🎓 View Certificate</a>
+    </div>
+
+    
+
+    <div style="background: #1a1f2e; padding: 1.5rem; border-radius: 12px; border: 1px solid #2a2f3e; box-shadow: 0 4px 20px rgba(255, 69, 0, 0.1);">
+      <h3 style="margin-bottom: 0.5rem;">MERN Stack Training</h3>
+      <p style="color: #a0a9c0;">Universal Informatics | Oct 2024 – Jan 2025</p>
+      <a href="https://media.licdn.com/dms/image/v2/D4D22AQHUBOgsHsg7pw/feedshare-shrink_800/B4DZf2JYpJGkAo-/0/1752181346326?e=1755129600&v=beta&t=54LTKWBX4maJgs1YVsIEz1NyXtNb45kbmn8npHDhqC0" target="_blank" style="display: inline-block; margin-top: 1rem; color: #ff4500; font-weight: bold;">🎓 View Certificate</a>
+    </div>
+
+    <div style="background: #1a1f2e; padding: 1.5rem; border-radius: 12px; border: 1px solid #2a2f3e; box-shadow: 0 4px 20px rgba(255, 69, 0, 0.1);">
+      <h3 style="margin-bottom: 0.5rem;">Data Science Job Simulation</h3>
+      <p style="color: #a0a9c0;">Issued by Forage | Nov 2024</p>
+      <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/SKZxezskWgmFjRvj9/Tcz8gTtprzAS4xSoK_SKZxezskWgmFjRvj9_EHMHKRdsPKPbvxqcv_1732015790351_completion_certificate.pdf" target="_blank" style="display: inline-block; margin-top: 1rem; color: #ff4500; font-weight: bold;">📄 View Certificate</a>
+    </div>
+
+  </div>
+
+  <div style="text-align: center; margin-top: 3rem;">
+  <a href="./5.1-main.pdf" download style="background: #ff4500; color: white; padding: 0.75rem 2rem; border-radius: 8px; font-weight: bold; text-decoration: none;">
+    ⬇️ Download My Resume (PDF)
+  </a>
+</div>
+
+</section>
+
+**
+    <section id="contact" class="container">
+      <h2 class="section-title">Contact Me</h2>
+      <form class="contact-form" onsubmit="submitForm(event)">
+        <input type="text" name="name" class="form-input" placeholder="Your Name" required />
+        <input type="email" name="email" class="form-input" placeholder="Your Email" required />
+        <input type="text" name="subject" class="form-input" placeholder="Subject" required />
+        <textarea name="message" class="form-textarea" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+        <div class="success-msg" id="successMsg" style="display:none;">Thanks! Message sent successfully ✅</div>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <div class="social-links">
+        <a href="https://github.com/hiteshpatidar009" target="_blank">GitHub</a> |
+        <a href="https://linkedin.com/in/hiteshpatidar009" target="_blank">LinkedIn</a> |
+        <a href="mailto:hiteshpatidar009@gmail.com">Email</a>
+      </div>
+      <p>© 2025 Hitesh Patidar — MERN Stack Developer</p>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("YOUR_PUBLIC_KEY_HERE"); // Replace with your EmailJS public key
+
+    function submitForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById("submitBtn");
+      const msg = document.getElementById("successMsg");
+      const form = e.target;
+
+      btn.disabled = true;
+      btn.textContent = "Sending...";
+
+      emailjs
+        .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", form)
+        .then(() => {
+          form.reset();
+          btn.disabled = false;
+          btn.textContent = "Send Message";
+          msg.style.display = "block";
+          setTimeout(() => (msg.style.display = "none"), 5000);
+        })
+        .catch(() => {
+          alert("Oops! Something went wrong.");
+          btn.disabled = false;
+          btn.textContent = "Send Message";
+        });
+    }
+  </script>
+
+</body>
+</html>
