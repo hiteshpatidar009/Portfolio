@@ -396,7 +396,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
-    emailjs.init("YOUR_PUBLIC_KEY_HERE"); // Replace with your EmailJS public key
+    emailjs.init("1ij6o8x5TKr5Gnfdj"); // Replace with your EmailJS public key
 
     function submitForm(e) {
       e.preventDefault();
@@ -408,7 +408,7 @@
       btn.textContent = "Sending...";
 
       emailjs
-        .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", form)
+        .sendForm("service_lco7kdp", "template_hirxpa4", form)
         .then(() => {
           form.reset();
           btn.disabled = false;
